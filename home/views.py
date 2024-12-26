@@ -11,8 +11,9 @@ def Home(request):
     ]
 
     text = "lorem ipsam dalor satis"
+    
 
-    return render(request, "index.html", context={'products':products, 'text':text})
+    return render(request, "index.html", context={'products':products, 'text':text, 'pagetitle' : 'Home'})
 
 
 def success_page(request):
