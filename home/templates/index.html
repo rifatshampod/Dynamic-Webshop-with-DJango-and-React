@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block start %}
+<h1>Hey, here is the product list</h1>
+{{products}}
+
+<table style="width: 50%">
+  <tr>
+    <th>#</th>
+    <th>Product Name</th>
+    <th>Price</th>
+    <th>Sale</th>
+  </tr>
+  {% for products in products %}
+  <tr>
+    <td>{{forloop.counter}}</td>
+    <td>{{products.name}}</td>
+    <td>{{products.price}} euro</td>
+    <td>{% if products.price <= 20 %} On Sale {%endif%}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h4>{{text|truncatechars:7}}</h4>
+{{text}} {% endblock %}
