@@ -9,7 +9,7 @@ class Student(models.Model):
     email = models.EmailField()
     address = models.TextField()
     file = models.FileField()
-    admin = models.BooleanField(default=0)
+    admin = models.BooleanField(default=1)
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
