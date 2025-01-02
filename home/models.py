@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 
+#CRUD operation 
+
 class Student(models.Model):
     #id = models.AutoField()
     name = models.CharField(max_length=155)
@@ -13,3 +15,10 @@ class Student(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
+
+class Car(models.Model):
+    car_name = models.CharField(max_length=500)
+    speed = models.IntegerField(default=50)
+
+    def __str__(self) -> str:
+        return self.car_name 
