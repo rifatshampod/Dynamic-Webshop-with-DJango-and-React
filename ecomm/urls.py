@@ -18,10 +18,13 @@ from django.contrib import admin
 from django.urls import path
 
 from home.views import *
+from dashboard.views import *
 
 urlpatterns = [
     path('', Home, name="home"),
     path('success', success_page, name="success"),
+    path('dashboard', Dashboard, name="Dashboard"),
+    path('about', About, name="About"),
 
     path('admin/', admin.site.urls),
 ]
