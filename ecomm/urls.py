@@ -25,6 +25,7 @@ urlpatterns = [
     path('success', success_page, name="success"),
     path('dashboard', Dashboard, name="Dashboard"),
     path('about', About, name="About"),
+    path('course', Course, name="Course"),
 
     path('admin/', admin.site.urls),
 ]

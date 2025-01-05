@@ -19,3 +19,7 @@ def Home(request):
 def success_page(request):
     print("*"*10)
     return HttpResponse("<h1>Hey, this is a success page.</h1>")
+
+def Course(request):
+
+    return render(request, "courses.html")
