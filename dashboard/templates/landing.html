@@ -1,11 +1,260 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Tabbed Interface</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <!-- Add Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <style>
+      :root {
+        --bs-primary: #1b919a; /* Replace with your desired color */
+      }
+    </style>
   </head>
   <body>
-    Model
+    <!-- partial:index.partial.html -->
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Modern Gradient Tabs</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}" />
+      </head>
+      <body>
+        <div class="container">
+          <h1 class="text-center mb-5">
+            Web Technology: Webshop Testing Dashboard
+          </h1>
+          <div class="tabs-container">
+            <div class="tabs">
+              <div class="tab-links">
+                <button class="tab-link active" data-tab="tab-1">
+                  <i class="fas fa-database"></i> DB Population
+                </button>
+                <button class="tab-link" data-tab="tab-2">
+                  <i class="fas fa-users"></i> User List
+                </button>
+                <button class="tab-link" data-tab="tab-3">
+                  <i class="fas fa-box"></i> Product List
+                </button>
+                <button class="tab-link" data-tab="tab-4">
+                  <i class="fas fa-cart-plus"></i> Order List
+                </button>
+              </div>
+
+              <div class="tab-content active" id="tab-1">
+                <div class="button-container text-center mx-4">
+                  <div class="button-group">
+                    <button class="clean-btn mx-3">Clean Database</button>
+                    <p class="btn-text">
+                      Cleaning Database will delete all the data in the database
+                    </p>
+                  </div>
+                  <div class="button-group">
+                    <button class="create-btn mx-3">Populate Database</button>
+                    <p class="btn-text">
+                      This button will create new users and products with the
+                      existing data
+                    </p>
+                  </div>
+                  <div class="button-group">
+                    <button class="cta-btn mx-3">
+                      Clean Database and Re-populate
+                    </button>
+                    <p class="btn-text">
+                      This button will delete all the existing data and create
+                      new users and products
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-content" id="tab-2">
+                <div class="table-responsive mt-5">
+                  <table class="table table-bordered align-middle text-center">
+                    <thead class="table-light">
+                      <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Email Address</th>
+                        <th>Password</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>rifatshampod</td>
+                        <td>shampodrifat@gmail.com</td>
+                        <td>password123</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>arifbipu</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>modeltest</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>testuser2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>7</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>8</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>9</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-content" id="tab-3">
+                <div class="table-responsive mt-5">
+                  <table class="table table-bordered align-middle text-center">
+                    <thead class="table-light">
+                      <tr>
+                        <th>#</th>
+                        <th>Product Title</th>
+                        <th>Price in Euro</th>
+                        <th>Seller Username</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>rifatshampod</td>
+                        <td>shampodrifat@gmail.com</td>
+                        <td>password123</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>arifbipu</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                        <td>modeltest</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                        <td>testuser2</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>7</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>8</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td>9</td>
+                        <td>testuser1</td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div class="tab-content" id="tab-4">
+                <div class="table-responsive mt-5">
+                  <table class="table table-bordered align-middle text-center">
+                    <thead class="table-light">
+                      <tr>
+                        <th>#</th>
+                        <th>Product</th>
+                        <th>Buyer</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Purchase Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Abo akademi Keyring</td>
+                        <td>rifatshampod</td>
+                        <td>2</td>
+                        <td>2.95 €</td>
+                        <td>01.07.2025</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="{% static 'script.js' %}"></script>
+      </body>
+    </html>
+    <!-- partial -->
+    <script src="{% static 'script.js' %}"></script>
+    <script>
+      document.documentElement.style.setProperty("--bs-primary", "#1b919a");
+    </script>
   </body>
 </html>
