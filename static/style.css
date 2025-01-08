@@ -5,9 +5,9 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #efefef; /* Charcoal background */
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  /* justify-content: center;
+  align-items: center; */
+  /* height: 100vh; */
   margin: 0;
   padding: 20px;
   box-sizing: border-box;
@@ -16,13 +16,14 @@ body {
 .tabs-container {
   width: 1300px;
   max-width: 1400px;
-  height: auto; /* Make the height flexible */
+  /* height: auto; Make the height flexible */
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   position: relative;
 }
+
 
 .tabs {
   padding: 10px 20px 15px 20px; /* Increased padding */
