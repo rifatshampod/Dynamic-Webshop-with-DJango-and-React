@@ -1,25 +1,11 @@
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from home.models import Product
+from home.serializers import ProductSerializer
 
-from django.http import HttpResponse
-
-def Home(request):
-    products = [
-        {'name': 'University Key Ring', 'price': 26},
-        {'name': 'Univesity banner', 'price': 22},
-        {'name': 'Turku Key Ring', 'price': 16},
-        {'name': 'Map', 'price': 21},
-    ]
-
-    text = "lorem ipsam dalor satis"
-    
-
-    return render(request, "index.html", context={'products':products, 'text':text, 'pagetitle' : 'Home'})
-
-
-def success_page(request):
-    print("*"*10)
-    return HttpResponse("<h1>Hey, this is a success page.</h1>")
-
-def Course(request):
-
-    return render(request, "courses.html")
+class ProductListView(APIView):
+    def get(self, request):
+        products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
