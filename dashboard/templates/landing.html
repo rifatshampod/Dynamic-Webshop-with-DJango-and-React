@@ -68,16 +68,24 @@
 
                 <div class="button-container text-center mx-4">
                   <div class="button-group">
-                    <button class="clean-btn mx-3">Clean Database</button>
+                    <form method="POST" action="{% url 'clean_data' %}">
+                      {% csrf_token %}
+                      <button class="clean-btn mx-3">Clean Database</button>
+                    </form>
+
                     <p class="btn-text">
                       Cleaning Database will delete all the data in the database
                     </p>
                   </div>
                   <div class="button-group">
-                    <button class="create-btn mx-3">Populate Database</button>
+                    <form method="POST" action="{% url 'populate' %}">
+                      {% csrf_token %}
+                      <button class="create-btn mx-3">Populate Database</button>
+                    </form>
+
                     <p class="btn-text">
-                      This button will create new users and products with the
-                      existing data
+                      This button will create 1 new user and 2 products of that
+                      user with the existing data
                     </p>
                   </div>
                   <div class="button-group">
@@ -88,8 +96,8 @@
                       </button>
                     </form>
                     <p class="btn-text">
-                      This button will delete all the existing data and create
-                      new users and products
+                      This button will delete all the existing data and create 6
+                      new users and 30 products
                     </p>
                   </div>
                 </div>

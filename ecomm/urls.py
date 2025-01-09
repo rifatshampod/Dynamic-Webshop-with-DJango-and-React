@@ -23,5 +23,7 @@ from dashboard.views import *
 urlpatterns = [
     path('', Dashboard, name="Dashboard"),
     path('clean-and-populate/', clean_and_populate, name='clean_and_populate'),
+    path('populate-data/', populatedb, name='populate'),
+    path('clean-data/', cleandata, name='clean_data'),
     path('admin/', admin.site.urls),
 ]
