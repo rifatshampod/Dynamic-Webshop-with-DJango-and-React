@@ -52,10 +52,10 @@
                 <!-- Status update alert when something changes  -->
                 {% if messages %} {% for message in messages %}
                 <div
-                  class="alert alert-warning alert-dismissible fade show mt-2"
+                  class="alert alert-info alert-dismissible fade show mt-2"
                   role="alert"
                 >
-                  <strong>Holy guacamole!</strong> {{ message }}
+                  <strong>Congratulations!</strong> {{ message }}
                   <button
                     type="button"
                     class="btn-close"
@@ -130,64 +130,20 @@
                         <th>#</th>
                         <th>Product Title</th>
                         <th>Price in Euro</th>
+                        <th>Quantity in Stock</th>
                         <th>Seller Username</th>
                       </tr>
                     </thead>
                     <tbody>
+                      {% for product in products %}
                       <tr>
-                        <td>1</td>
-                        <td>rifatshampod</td>
-                        <td>shampodrifat@gmail.com</td>
-                        <td>password123</td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}} €</td>
+                        <td>{{product.quantity}}</td>
+                        <td>{{product.user.username}}</td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>arifbipu</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>modeltest</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>testuser2</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>8</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>9</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                 </div>
@@ -208,14 +164,16 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {% for order in orders %}
                       <tr>
-                        <td>1</td>
-                        <td>Abo akademi Keyring</td>
-                        <td>rifatshampod</td>
-                        <td>2</td>
-                        <td>2.95 €</td>
-                        <td>01.07.2025</td>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{order.product.name}}</td>
+                        <td>{{order.buyer.username}}</td>
+                        <td>{{order.quantity}}</td>
+                        <td>{{order.total_price}} €</td>
+                        <td>{{order.purchase_date}}</td>
                       </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                 </div>

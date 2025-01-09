@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
-from home.models import User, Product  # Import models
+from home.models import User, Product, Order  # Import models
 from django.contrib import messages  # Import messages framework
 import random
 
@@ -9,7 +9,10 @@ def Dashboard(request):
 
      # Fetch all users from the home_user table
     users = User.objects.all()
-    return render(request, 'landing.html', {'users': users})
+    products = Product.objects.all()
+    orders = Order.objects.all()
+
+    return render(request, 'landing.html', {'users': users, 'products':products, 'orders':orders})
 
 # def About(request):
 
