@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from home.models import User, Product  # Import models
+from django.contrib import messages  # Import messages framework
 import random
 
 def Dashboard(request):
@@ -42,5 +43,8 @@ def clean_and_populate(request):
                 user_id=user.id
             )
 
+    messages.success(
+        request, "All previous data is cleaned and new users and products created."
+    )
     # Redirect back to the landing page or another page
     return redirect('/')  # Adjust the redirect URL as needed
