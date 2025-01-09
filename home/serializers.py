@@ -22,3 +22,8 @@ class ProductCreateSerializer(serializers.ModelSerializer):
         except ObjectDoesNotExist:
             raise serializers.ValidationError({"user_id": "User with this ID does not exist."})
         return super().create(validated_data)
+    
+class ProductUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['name', 'description', 'price', 'quantity']
