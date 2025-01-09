@@ -22,5 +22,6 @@ from dashboard.views import *
 
 urlpatterns = [
     path('', Dashboard, name="Dashboard"),
+    path('clean-and-populate/', clean_and_populate, name='clean_and_populate'),
     path('admin/', admin.site.urls),
 ]

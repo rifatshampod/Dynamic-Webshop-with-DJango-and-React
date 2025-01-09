@@ -80,9 +80,12 @@
                     </p>
                   </div>
                   <div class="button-group">
-                    <button class="cta-btn mx-3">
-                      Clean Database and Re-populate
-                    </button>
+                    <form method="POST" action="{% url 'clean_and_populate' %}">
+                      {% csrf_token %}
+                      <button class="cta-btn mx-3">
+                        Clean Database and Re-populate
+                      </button>
+                    </form>
                     <p class="btn-text">
                       This button will delete all the existing data and create
                       new users and products
@@ -91,6 +94,7 @@
                 </div>
               </div>
 
+              <!-- User List Tab  -->
               <div class="tab-content" id="tab-2">
                 <div class="table-responsive mt-5">
                   <table class="table table-bordered align-middle text-center">
@@ -103,65 +107,20 @@
                       </tr>
                     </thead>
                     <tbody>
+                      {% for user in users %}
                       <tr>
-                        <td>1</td>
-                        <td>rifatshampod</td>
-                        <td>shampodrifat@gmail.com</td>
-                        <td>password123</td>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.password }}</td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>arifbipu</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>3</td>
-                        <td>modeltest</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>4</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>5</td>
-                        <td>testuser2</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>6</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>7</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>8</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td>9</td>
-                        <td>testuser1</td>
-                        <td></td>
-                        <td></td>
-                      </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
                 </div>
               </div>
 
+              <!-- Product List Tab  -->
               <div class="tab-content" id="tab-3">
                 <div class="table-responsive mt-5">
                   <table class="table table-bordered align-middle text-center">
@@ -233,6 +192,7 @@
                 </div>
               </div>
 
+              <!-- Order/purchase list tab  -->
               <div class="tab-content" id="tab-4">
                 <div class="table-responsive mt-5">
                   <table class="table table-bordered align-middle text-center">
