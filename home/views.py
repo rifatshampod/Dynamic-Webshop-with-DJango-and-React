@@ -9,3 +9,11 @@ class ProductListView(APIView):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class UserProductsView(APIView):
+    def get(self, request, user_id):
+        products = Product.objects.filter(user_id=user_id)
+        if not products.exists():
+            return Response({"message": "No products found for this user."}, status=status.HTTP_404_NOT_FOUND)
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
