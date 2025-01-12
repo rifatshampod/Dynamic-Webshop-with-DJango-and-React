@@ -36,5 +36,10 @@ urlpatterns = [
 
     # User APIs 
     path('api/users/', UserListView.as_view(), name='user-list'),
-    
+
+    # Cart APIs 
+    path('api/cart', CartListView.as_view(), name='all-cart'),
+    path('api/cart/create/', CartCreateView.as_view(), name='add-to-cart'),
+
+
 ]
