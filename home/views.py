@@ -13,6 +13,25 @@ class ProductListView(APIView):
         products = Product.objects.all()
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class UserProductAPIView(APIView):
+    def get(self, request):
+        # Get user_id from query parameters
+        user_id = request.query_params.get('user_id', None)
+
+        if not user_id:
+            return Response({"error": "user_id query parameter is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Fetch order data for the given user
+            product_items = Product.objects.filter(user_id=user_id)
+            if not product_items.exists():
+                return Response({"message": "No product found for this user."}, status=status.HTTP_404_NOT_FOUND)
+            
+            serializer = ProductSerializer(product_items, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UserProductsView(APIView):
     def get(self, request, user_id):
@@ -34,10 +53,21 @@ class ProductCreateView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 class ProductEditView(APIView):
-    def put(self, request, user_id, product_id):
+    def put(self, request):
+        # Fetch product_id and user_id from query parameters
+        product_id = request.query_params.get('product_id', None)
+        user_id = request.query_params.get('user_id', None)
+
+        # Validate the presence of both query parameters
+        if not product_id or not user_id:
+            return Response(
+                {"error": "Both product_id and user_id query parameters are required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
         # Check if the product exists and belongs to the specified user
         product = get_object_or_404(Product, id=product_id, user_id=user_id)
-        
+
         # Serialize the data
         serializer = ProductUpdateSerializer(product, data=request.data)
         if serializer.is_valid():
@@ -105,12 +135,21 @@ class UserCartView(APIView):
 
 
 class EditCartItemAPIView(APIView):
-    def put(self, request, cart_id):
+    def put(self, request):
+        # Fetch cart_id from query parameters
+        cart_id = request.query_params.get('cart_id', None)
+
+        # Validate presence of cart_id
+        if not cart_id:
+            return Response({"error": "cart_id query parameter is required."}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
+            # Fetch cart item
             cart_item = Cart.objects.get(id=cart_id)
         except Cart.DoesNotExist:
             return Response({"error": "Cart item not found."}, status=status.HTTP_404_NOT_FOUND)
 
+        # Serialize the data
         serializer = CartEditSerializer(cart_item, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -118,13 +157,22 @@ class EditCartItemAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DeleteCartItemAPIView(APIView):
-    def delete(self, request, cart_id):
+    def delete(self, request):
+        # Fetch cart_id from query parameters
+        cart_id = request.query_params.get('cart_id', None)
+
+        # Validate presence of cart_id
+        if not cart_id:
+            return Response({"error": "cart_id query parameter is required."}, status=status.HTTP_400_BAD_REQUEST)
+
         try:
+            # Fetch cart item
             cart_item = Cart.objects.get(id=cart_id)
             cart_item.delete()
             return Response({"message": "Cart item deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
         except Cart.DoesNotExist:
             return Response({"error": "Cart item not found."}, status=status.HTTP_404_NOT_FOUND)
+
 
 # Order API views ------------------------------------------------------------------
 
@@ -133,6 +181,25 @@ class OrderListView(APIView):
         orders = Order.objects.all()
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+class UserOrderAPIView(APIView):
+    def get(self, request):
+        # Get user_id from query parameters
+        user_id = request.query_params.get('user_id', None)
+
+        if not user_id:
+            return Response({"error": "user_id query parameter is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Fetch order data for the given user
+            order_items = Order.objects.filter(buyer_id=user_id)
+            if not order_items.exists():
+                return Response({"message": "No order found for this user."}, status=status.HTTP_404_NOT_FOUND)
+            
+            serializer = OrderSerializer(order_items, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class OrderCreateView(APIView):
     def post(self, request):
