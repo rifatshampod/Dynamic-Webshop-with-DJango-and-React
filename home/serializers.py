@@ -2,6 +2,9 @@ from rest_framework import serializers
 from home.models import User, Product
 from django.core.exceptions import ObjectDoesNotExist
 
+
+# Product API Serializers --------------------------------
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
@@ -27,3 +30,11 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ['name', 'description', 'price', 'quantity']
+
+
+# User API serializers --------------------------------------------
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'username', 'password']

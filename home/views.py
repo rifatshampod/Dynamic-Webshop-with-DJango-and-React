@@ -1,11 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from home.models import Product
+from home.models import Product, User
 from django.shortcuts import get_object_or_404
 from home.serializers import ProductSerializer
 from home.serializers import ProductCreateSerializer
 from home.serializers import ProductUpdateSerializer
+from home.serializers import UserSerializer
 
 class ProductListView(APIView):
     def get(self, request):
@@ -46,3 +47,9 @@ class ProductEditView(APIView):
                 status=status.HTTP_200_OK
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class UserListView(APIView):
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
