@@ -6,6 +6,7 @@ from home.views import *
 from dashboard.views import *
 
 urlpatterns = [
+    # Landing page routes
     path('', Dashboard, name="Dashboard"),
     path('clean-and-populate/', clean_and_populate, name='clean_and_populate'),
     path('populate-data/', populatedb, name='populate'),
@@ -20,6 +21,9 @@ urlpatterns = [
 
     # User APIs 
     path('api/users/', UserListView.as_view(), name='user-list'),
+    # path('register/', UserRegistrationAPIView.as_view(), name='register'),
+    # path('login/', UserLoginAPIView.as_view(), name='login'),
+    # path('change-password/', ChangePasswordAPIView.as_view(), name='change_password'),
 
     # Cart APIs 
     path('api/cart', UserCartAPIView.as_view(), name='user-cart'),
@@ -30,11 +34,4 @@ urlpatterns = [
     # Order APIs
     path('api/orders', UserOrderAPIView.as_view(), name='user-order'),
     path('api/orders/create/', OrderCreateView.as_view(), name='add-order'),
-
-    # User APIs 
-    # path('register/', UserRegistrationAPIView.as_view(), name='register'),
-    # path('login/', UserLoginAPIView.as_view(), name='login'),
-    # path('change-password/', ChangePasswordAPIView.as_view(), name='change_password'),
-
-    
 ]
