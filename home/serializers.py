@@ -44,7 +44,7 @@ class UserSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
-        fields = ['product', 'user', 'quantity']
+        fields = ['id','product_id', 'user_id', 'quantity']
 
 class CartCreateSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(write_only=True)  # Accept user_id in the request
@@ -72,5 +72,10 @@ class CartCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"product_id": "Product with this ID does not exist."})
 
         return super().create(validated_data)
+    
+class CartEditSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ['quantity']
 
     

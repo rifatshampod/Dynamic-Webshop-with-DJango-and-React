@@ -5,7 +5,7 @@ from home.models import Product, User, Cart
 from django.shortcuts import get_object_or_404
 from home.serializers import ProductSerializer, ProductCreateSerializer, ProductUpdateSerializer
 from home.serializers import UserSerializer
-from home.serializers import CartSerializer, CartCreateSerializer
+from home.serializers import CartSerializer, CartCreateSerializer, CartEditSerializer
 
 class ProductListView(APIView):
     def get(self, request):
@@ -75,4 +75,33 @@ class CartCreateView(APIView):
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class UserCartView(APIView):
+    def get(self, request, user_id):
+        carts = Cart.objects.filter(user_id=user_id)
+        if not carts.exists():
+            return Response({"message": "No products found in cart for this user."}, status=status.HTTP_404_NOT_FOUND)
+        serializer = CartSerializer(carts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
+
+class EditCartItemAPIView(APIView):
+    def put(self, request, cart_id):
+        try:
+            cart_item = Cart.objects.get(id=cart_id)
+        except Cart.DoesNotExist:
+            return Response({"error": "Cart item not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = CartEditSerializer(cart_item, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Cart item updated successfully.", "data": serializer.data})
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class DeleteCartItemAPIView(APIView):
+    def delete(self, request, cart_id):
+        try:
+            cart_item = Cart.objects.get(id=cart_id)
+            cart_item.delete()
+            return Response({"message": "Cart item deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
+        except Cart.DoesNotExist:
+            return Response({"error": "Cart item not found."}, status=status.HTTP_404_NOT_FOUND)

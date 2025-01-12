@@ -40,6 +40,8 @@ urlpatterns = [
     # Cart APIs 
     path('api/cart', CartListView.as_view(), name='all-cart'),
     path('api/cart/create/', CartCreateView.as_view(), name='add-to-cart'),
-
-
+    path('api/user/<int:user_id>/cart/', UserCartView.as_view(), name='user-cart'),
+    path('api/cart/<int:cart_id>/edit/', EditCartItemAPIView.as_view(), name='edit_cart_item'),
+    path('api/cart/<int:cart_id>/delete/', DeleteCartItemAPIView.as_view(), name='delete_cart_item'),
+    
 ]
