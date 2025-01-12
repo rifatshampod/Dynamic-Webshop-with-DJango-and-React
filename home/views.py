@@ -1,11 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from home.models import Product, User, Cart
+from home.models import Product, User, Cart, Order
 from django.shortcuts import get_object_or_404
 from home.serializers import ProductSerializer, ProductCreateSerializer, ProductUpdateSerializer
 from home.serializers import UserSerializer
 from home.serializers import CartSerializer, CartCreateSerializer, CartEditSerializer
+from home.serializers import OrderSerializer, OrderCreateSerializer
 
 class ProductListView(APIView):
     def get(self, request):
@@ -105,3 +106,30 @@ class DeleteCartItemAPIView(APIView):
             return Response({"message": "Cart item deleted successfully."}, status=status.HTTP_204_NO_CONTENT)
         except Cart.DoesNotExist:
             return Response({"error": "Cart item not found."}, status=status.HTTP_404_NOT_FOUND)
+
+# Order API views ------------------------------------------------------------------
+
+class OrderListView(APIView):
+    def get(self, request):
+        orders = Order.objects.all()
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class OrderCreateView(APIView):
+    def post(self, request):
+        serializer = OrderCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(
+                {"message": "Product added to cart successfully", "cart": serializer.data},
+                status=status.HTTP_201_CREATED
+            )
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class UserOrderView(APIView):
+    def get(self, request, user_id):
+        orders = Order.objects.filter(buyer_id=user_id)
+        if not orders.exists():
+            return Response({"message": "No order found in purchase history for this user."}, status=status.HTTP_404_NOT_FOUND)
+        serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
