@@ -2,6 +2,8 @@ from rest_framework import serializers
 from home.models import User, Product, Cart, Order
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction  # To handle database transactions
+from django.contrib.auth.hashers import make_password, check_password
+from rest_framework_simplejwt.tokens import AccessToken
 
 
 # Product API Serializers --------------------------------
@@ -120,3 +122,75 @@ class OrderCreateSerializer(serializers.ModelSerializer):
 
         return order
     
+# User API serializers --------------------------------
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def create(self, validated_data):
+        # Create a user instance with hashed password
+        user = User.objects.create(
+            username=validated_data['username'],
+            email=validated_data['email'],
+        )
+        user.password = make_password(validated_data['password'])  # Hash the password
+        user.save()
+        return user
+
+# class UserLoginSerializer(serializers.Serializer):
+#     username = serializers.CharField()
+#     password = serializers.CharField(write_only=True)
+
+#     def validate(self, data):
+#         try:
+#             user = User.objects.get(username=data['username'])
+#             if not check_password(data['password'], user.password):
+#                 raise serializers.ValidationError("Incorrect password.")
+#         except User.DoesNotExist:
+#             raise serializers.ValidationError("User does not exist.")
+
+#         return {"username": user.username, "user_id": user.id, "access_token": user.access_token}
+
+class UserLoginSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        try:
+            user = User.objects.get(username=data['username'])
+            if not check_password(data['password'], user.password):
+                raise serializers.ValidationError("Incorrect password.")
+        except User.DoesNotExist:
+            raise serializers.ValidationError("User does not exist.")
+
+        # Generate only the access token
+        access_token = AccessToken.for_user(user)
+
+        return {
+            "username": user.username,
+            "user_id": user.id,
+            "access_token": str(access_token),
+        }
+    
+class ChangePasswordSerializer(serializers.Serializer):
+    username = serializers.CharField()
+    old_password = serializers.CharField(write_only=True)
+    new_password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        try:
+            user = User.objects.get(username=data['username'])
+            if not check_password(data['old_password'], user.password):
+                raise serializers.ValidationError("Incorrect old password.")
+        except User.DoesNotExist:
+            raise serializers.ValidationError("User does not exist.")
+
+        return data
+
+    def save(self):
+        user = User.objects.get(username=self.validated_data['username'])
+        user.password = make_password(self.validated_data['new_password'])  # Hash the new password
+        user.save()

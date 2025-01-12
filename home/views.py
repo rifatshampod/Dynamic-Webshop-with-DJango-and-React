@@ -4,7 +4,7 @@ from rest_framework import status
 from home.models import Product, User, Cart, Order
 from django.shortcuts import get_object_or_404
 from home.serializers import ProductSerializer, ProductCreateSerializer, ProductUpdateSerializer
-from home.serializers import UserSerializer
+from home.serializers import UserSerializer, UserRegistrationSerializer, UserLoginSerializer, ChangePasswordSerializer
 from home.serializers import CartSerializer, CartCreateSerializer, CartEditSerializer
 from home.serializers import OrderSerializer, OrderCreateSerializer
 
@@ -85,6 +85,31 @@ class UserListView(APIView):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class UserRegistrationAPIView(APIView):
+    def post(self, request):
+        serializer = UserRegistrationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "User registered successfully."}, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class UserLoginAPIView(APIView):
+    def post(self, request):
+        serializer = UserLoginSerializer(data=request.data)
+        if serializer.is_valid():
+            return Response(serializer.validated_data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class ChangePasswordAPIView(APIView):
+    def post(self, request):
+        serializer = ChangePasswordSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message": "Password updated successfully."}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
     
 
 # Cart API Views -------------------------------
