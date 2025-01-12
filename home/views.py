@@ -59,6 +59,25 @@ class UserListView(APIView):
 
 # Cart API Views -------------------------------
 
+class UserCartAPIView(APIView):
+    def get(self, request):
+        # Get user_id from query parameters
+        user_id = request.query_params.get('user_id', None)
+
+        if not user_id:
+            return Response({"error": "user_id query parameter is required."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            # Fetch cart data for the given user
+            cart_items = Cart.objects.filter(user_id=user_id)
+            if not cart_items.exists():
+                return Response({"message": "No cart items found for this user."}, status=status.HTTP_404_NOT_FOUND)
+            
+            serializer = CartSerializer(cart_items, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 class CartListView(APIView):
     def get(self, request):
         carts = Cart.objects.all()

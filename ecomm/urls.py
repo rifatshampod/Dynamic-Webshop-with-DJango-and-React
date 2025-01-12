@@ -38,9 +38,9 @@ urlpatterns = [
     path('api/users/', UserListView.as_view(), name='user-list'),
 
     # Cart APIs 
-    path('api/cart', CartListView.as_view(), name='all-cart'),
+    path('api/cart', UserCartAPIView.as_view(), name='user-cart'),
     path('api/cart/create/', CartCreateView.as_view(), name='add-to-cart'),
-    path('api/user/<int:user_id>/cart/', UserCartView.as_view(), name='user-cart'),
+    # path('api/user/<int:user_id>/cart/', UserCartView.as_view(), name='user-cart'),
     path('api/cart/<int:cart_id>/edit/', EditCartItemAPIView.as_view(), name='edit_cart_item'),
     path('api/cart/<int:cart_id>/delete/', DeleteCartItemAPIView.as_view(), name='delete_cart_item'),
 
@@ -48,6 +48,11 @@ urlpatterns = [
     path('api/orders', OrderListView.as_view(), name='all-order'),
     path('api/orders/create/', OrderCreateView.as_view(), name='add-order'),
     path('api/user/<int:user_id>/orders/', UserOrderView.as_view(), name='user-order'),
+
+    # User APIs 
+    # path('register/', UserRegistrationAPIView.as_view(), name='register'),
+    # path('login/', UserLoginAPIView.as_view(), name='login'),
+    # path('change-password/', ChangePasswordAPIView.as_view(), name='change_password'),
 
     
 ]
