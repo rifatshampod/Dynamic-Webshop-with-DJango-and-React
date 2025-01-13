@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from home.models import User, Product, Order  # Import models
 from django.contrib import messages  # Import messages framework
 import random
+from django.contrib.auth.hashers import make_password, check_password
 
 def Dashboard(request):
 
@@ -26,7 +27,7 @@ def clean_and_populate(request):
         user = User.objects.create(
             username=f"testuser{i}",
             email=f"testuser{i}@shop.aa",
-            password=f"pass{i}"
+            password=make_password(f"pass{i}")
         )
         users.append(user)
 
