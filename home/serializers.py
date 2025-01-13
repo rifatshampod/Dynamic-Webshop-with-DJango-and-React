@@ -128,15 +128,15 @@ class OrderCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"product_id": "Product with this ID does not exist."})
 
         # Check if the requested quantity is available in stock
-        if product.stock < quantity:
+        if product.quantity < quantity:
             raise serializers.ValidationError(
-                {"quantity": f"Only {product.stock} items available in stock."}
+                {"quantity": f"Only {product.quantity} items available in stock."}
             )
 
         # Use a database transaction to ensure atomicity
         with transaction.atomic():
             # Deduct the quantity from the product stock
-            product.stock -= quantity
+            product.quantity -= quantity
             product.save()
 
             # Create the order
