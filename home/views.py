@@ -60,7 +60,7 @@ class UserProductAPIView(APIView):
             # Fetch order data for the given user
             product_items = Product.objects.filter(user_id=user_id)
             if not product_items.exists():
-                return Response({"message": "No product found for this user."}, status=status.HTTP_404_NOT_FOUND)
+                return Response([], status=status.HTTP_200_OK)
             
             serializer = ProductSerializer(product_items, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -71,7 +71,7 @@ class UserProductsView(APIView):
     def get(self, request, user_id):
         products = Product.objects.filter(user_id=user_id)
         if not products.exists():
-            return Response({"message": "No products found for this user."}, status=status.HTTP_404_NOT_FOUND)
+            return Response([], status=status.HTTP_200_OK)
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
@@ -160,7 +160,7 @@ class UserCartAPIView(APIView):
             # Fetch cart data for the given user
             cart_items = Cart.objects.filter(user_id=user_id)
             if not cart_items.exists():
-                return Response({"message": "No cart items found for this user."}, status=status.HTTP_404_NOT_FOUND)
+                return Response([], status=status.HTTP_200_OK)
             
             serializer = CartSerializer(cart_items, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -253,7 +253,7 @@ class UserOrderAPIView(APIView):
             # Fetch order data for the given user
             order_items = Order.objects.filter(buyer_id=user_id)
             if not order_items.exists():
-                return Response({"message": "No order found for this user."}, status=status.HTTP_404_NOT_FOUND)
+                return Response([], status=status.HTTP_200_OK)
             
             serializer = OrderSerializer(order_items, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -275,6 +275,6 @@ class UserOrderView(APIView):
     def get(self, request, user_id):
         orders = Order.objects.filter(buyer_id=user_id)
         if not orders.exists():
-            return Response({"message": "No order found in purchase history for this user."}, status=status.HTTP_404_NOT_FOUND)
+            return Response([], status=status.HTTP_200_OK)
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)

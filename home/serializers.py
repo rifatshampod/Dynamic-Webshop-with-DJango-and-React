@@ -57,12 +57,12 @@ class CartCreateSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(write_only=True)  # Accept user_id in the request
     user = serializers.StringRelatedField(read_only=True)  # Return user info in the response
 
-    product_id = serializers.IntegerField(write_only=True)  # Accept user_id in the request
-    product = serializers.StringRelatedField(read_only=True)  # Return user info in the response
+    product_id = serializers.IntegerField(write_only=True)  # Accept product_id in the request
+    product = serializers.StringRelatedField(read_only=True)  # Return product info in the response
 
     class Meta:
         model = Cart
-        fields = ['quantity','product_id', 'user_id', 'user', 'product']
+        fields = ['quantity', 'product_id', 'user_id', 'user', 'product']
 
     def create(self, validated_data):
         user_id = validated_data.pop('user_id')
@@ -77,6 +77,13 @@ class CartCreateSerializer(serializers.ModelSerializer):
             validated_data['product'] = Product.objects.get(id=product_id)
         except Product.DoesNotExist:
             raise serializers.ValidationError({"product_id": "Product with this ID does not exist."})
+
+        # Check if the product is already in the cart for the user
+        existing_cart_item = Cart.objects.filter(user_id=user_id, product_id=product_id).first()
+        if existing_cart_item:
+            raise serializers.ValidationError(
+                {"detail": "This product is already in the cart for this user."}
+            )
 
         return super().create(validated_data)
     
