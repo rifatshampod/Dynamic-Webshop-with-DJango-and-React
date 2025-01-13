@@ -154,7 +154,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000", # Add other origins as needed
 ]
 CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ORIGIN_WHITELIST = ( 'http://localhost:5173',
-#                          "http://localhost:3000",  # For local development
-#     "http://127.0.0.1:8000", # Add other origins as needed
-#       )
+
+# CORS_ORIGIN_WHITELIST = ( 'http://localhost:5173' )
