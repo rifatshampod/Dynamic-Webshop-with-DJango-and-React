@@ -202,21 +202,24 @@ class UserLoginSerializer(serializers.Serializer):
         }
     
 class ChangePasswordSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    user_id = serializers.IntegerField()  # Accept user_id in the request body
     old_password = serializers.CharField(write_only=True)
     new_password = serializers.CharField(write_only=True)
 
     def validate(self, data):
         try:
-            user = User.objects.get(username=data['username'])
-            if not check_password(data['old_password'], user.password):
-                raise serializers.ValidationError("Incorrect old password.")
+            user = User.objects.get(id=data['user_id'])
         except User.DoesNotExist:
-            raise serializers.ValidationError("User does not exist.")
+            raise serializers.ValidationError({"user_id": "User with this ID does not exist."})
+
+        # Verify the old password
+        if not check_password(data['old_password'], user.password):
+            raise serializers.ValidationError({"old_password": "Incorrect old password."})
 
         return data
 
     def save(self):
-        user = User.objects.get(username=self.validated_data['username'])
-        user.password = make_password(self.validated_data['new_password'])  # Hash the new password
+        user = User.objects.get(id=self.validated_data['user_id'])
+        # Hash the new password before saving
+        user.password = make_password(self.validated_data['new_password'])
         user.save()
