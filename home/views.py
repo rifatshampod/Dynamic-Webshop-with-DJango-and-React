@@ -14,6 +14,15 @@ class ProductListView(APIView):
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
+class SingleProductView(APIView):
+    def get(self, request, product_id):
+        # Fetch the product based on the provided product_id
+        product = get_object_or_404(Product, id=product_id)
+        
+        # Serialize the product
+        serializer = ProductSerializer(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 class UserProductAPIView(APIView):
     def get(self, request):
         # Get user_id from query parameters
