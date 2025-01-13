@@ -15,7 +15,7 @@ urlpatterns = [
 
     # Product APIs 
     path('api/products', ProductListView.as_view(), name='product-list'),
-     path('products/<int:product_id>', SingleProductView.as_view(), name='single_product'),
+    path('api/products/<int:product_id>/', SingleProductView.as_view(), name='single_product'),
     path('api/products/seller', UserProductAPIView.as_view(), name='user-products'),
     path('api/products/create', ProductCreateView.as_view(), name='product-create'),
     path('api/products/edit', ProductEditView.as_view(), name='product-edit'),

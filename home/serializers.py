@@ -45,9 +45,12 @@ class UserSerializer(serializers.ModelSerializer):
 # Cart API serializers ---------------------------------------------
 
 class CartSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)  # Use the related Product object
+
     class Meta:
         model = Cart
-        fields = ['id','product_id', 'user_id', 'quantity']
+        fields = ['id', 'product_id', 'user_id', 'quantity', 'product']
+
 
 class CartCreateSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(write_only=True)  # Accept user_id in the request
