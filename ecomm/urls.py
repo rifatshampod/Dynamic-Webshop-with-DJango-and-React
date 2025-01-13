@@ -19,6 +19,7 @@ urlpatterns = [
     path('api/products/seller', UserProductAPIView.as_view(), name='user-products'),
     path('api/products/create', ProductCreateView.as_view(), name='product-create'),
     path('api/products/edit', ProductEditView.as_view(), name='product-edit'),
+    path('api/products/search/', ProductSearchView.as_view(), name='product-search'),
 
     # User APIs 
     path('api/users', UserListView.as_view(), name='user-list'),

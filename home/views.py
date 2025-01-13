@@ -1,6 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.db.models import Q
 from home.models import Product, User, Cart, Order
 from django.shortcuts import get_object_or_404
 from home.serializers import ProductSerializer, ProductCreateSerializer, ProductUpdateSerializer
@@ -11,6 +12,30 @@ from home.serializers import OrderSerializer, OrderCreateSerializer
 class ProductListView(APIView):
     def get(self, request):
         products = Product.objects.all()
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class ProductSearchView(APIView):
+    def get(self, request):
+        # Get the 'title' query parameter
+        title = request.query_params.get('title', '')
+
+        if not title:
+            return Response(
+                {"error": "Title query parameter is required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Search for products where the title matches or contains the search term
+        products = Product.objects.filter(Q(name__icontains=title))
+
+        if not products.exists():
+            return Response(
+                {"message": "No products found matching the search term."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # Serialize the products
         serializer = ProductSerializer(products, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
@@ -241,7 +266,7 @@ class OrderCreateView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(
-                {"message": "Product added to cart successfully", "cart": serializer.data},
+                {"message": "Product purchased successfully", "cart": serializer.data},
                 status=status.HTTP_201_CREATED
             )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

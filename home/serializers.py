@@ -13,6 +13,7 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = ['id', 'name', 'description', 'price', 'quantity', 'user_id', 'created_at']
 
+
 class ProductCreateSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(write_only=True)  # Accept user_id in the request
     user = serializers.StringRelatedField(read_only=True)  # Return user info in the response
@@ -104,19 +105,33 @@ class OrderCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         buyer_id = validated_data.pop('buyer_id')
         product_id = validated_data.pop('product_id')
+        quantity = validated_data.get('quantity')
 
         try:
+            # Retrieve the buyer
             validated_data['buyer'] = User.objects.get(id=buyer_id)
         except User.DoesNotExist:
             raise serializers.ValidationError({"buyer_id": "User with this ID does not exist."})
 
         try:
-            validated_data['product'] = Product.objects.get(id=product_id)
+            # Retrieve the product
+            product = Product.objects.get(id=product_id)
+            validated_data['product'] = product
         except Product.DoesNotExist:
             raise serializers.ValidationError({"product_id": "Product with this ID does not exist."})
 
+        # Check if the requested quantity is available in stock
+        if product.stock < quantity:
+            raise serializers.ValidationError(
+                {"quantity": f"Only {product.stock} items available in stock."}
+            )
+
         # Use a database transaction to ensure atomicity
         with transaction.atomic():
+            # Deduct the quantity from the product stock
+            product.stock -= quantity
+            product.save()
+
             # Create the order
             order = super().create(validated_data)
 
@@ -124,6 +139,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
             Cart.objects.filter(user_id=buyer_id).delete()
 
         return order
+    
     
 # User API serializers --------------------------------
 
