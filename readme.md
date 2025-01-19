@@ -2,31 +2,67 @@
 
 ## Author
 
-- **Name**: Rashedul Alam
-- **Email**: rashedul.alam@abo.fi
+- **Name**: Rifat Bin Monsur
+- **Email**: rifat.binmonsur@abo.fi
 
-## Implemented Features
+## Implemented Requirements
 
 This project has all the implementation of mandatory and optional requirements.
 
-### Core Features:
+### Mandatory Requirements:
 
-- User authentication (login, registration)
-- Product listing and filtering
-- Shopping cart functionality
-- Payment processing
-- Inventory
+- **RQ 1: Project Folder:**
+  - Root folder contains `readme.md` listing name, email, implemented requirements, and run instructions.
+  - Backend folder contains `requirements.txt`.
+  - Frontend folder contains `package.json` and source files.
+- **RQ 2: Backend:**
+  - Built using Django v5.1.4.
+  - Provides an API and serves JSON to the shop page and HTML for the landing page.
+  - Uses SQLite as the database.
+- **RQ 3: Frontend:**
+  - Implemented using React v18.3.1.
+- **RQ 4: Automatic Database Population:**
+  - A button or link populates the database with 6 users and 30 items, clears the database before repopulation, and updates the landing page with a message.
+- **RQ 5: Browse Items:**
+  - Any user can view a list of items for sale with details such as title, description, price, and date added.
+- **RQ 6: Create Account:**
+  - Users can register by providing a username, password, and email.
+- **RQ 7: Login:**
+  - Registered users can log in with their username and password.
+- **RQ 8: Add Item:**
+  - Authenticated users can add items to sell by providing a title, description, and price.
+- **RQ 9: Add to Cart:**
+  - Authenticated users can add items to their cart, excluding their own items.
 
-### Optional Requirements Implemented:
+### Optional Requirements:
 
-- **RQ-6**: Search
-- **RQ-11**: Remove from the cart
-- **RQ-12**: Pay
-- **RQ-13**: Routing
-- **RQ-14**: Edit Account
-- **RQ-15**: Display inventory
-- **RQ-16**: Edit item
-- **Non Functional**: The web pages should look nice and easy to use on regular desktop screens
+- **RQ 10: Search:**  
+  Users can search for items by part of the product title. Search function results in an API request.
+- **RQ 11: Remove from Cart:**  
+  Items can be removed from the cart by the buyer.
+- **RQ 12: Pay:**  
+  Buyers can view items in the cart and proceed with a payment system that handles price changes or unavailable items.
+- **RQ 13: Routing:**  
+  Implemented as a Single Page Application (SPA) with routes such as `/`, `/signup`, `/login`, `/account`, and `/myitems`.
+- **RQ: 14: Edit Account:**  
+  Authenticated users can change their password.
+- **RQ 15: Display Inventory:**  
+  Authenticated users can view their items from the "Inventory" page in the user menu, items are categorised as 'Available' and 'Sold Out'
+- **RQ 16: Edit Item:**  
+  Sellers can update the price of items that are still available.
+- **Non-functional:**  
+  The web pages are designed to be user-friendly and visually appealing on desktop screens. UI design is inspired from the Åbo Akademi Webshop.
+
+### Additional Implementations:
+
+- **Product Quantity:**  
+  Users can create their own products with multiple quantities, and can order in multiple quantities as long as the product is availalbe in that quantity.
+- **Product Edit:**  
+  User can edit any information of their own product.
+- **Automatic DB population:**  
+  One additional button "Populate Database" is added to create one additional user with 2 products of that user without deleting the existing data in database.
+
+---
 
 ## How to Run the Project
 
@@ -34,23 +70,25 @@ This project has all the implementation of mandatory and optional requirements.
 
 Make sure you have the following installed on your system(these version has been used while local development however older version may work):
 
-- **Python 3.12.0 or later**
-- **Node v20.10.0 or later**
+- **Python 3.12.8 or later**
+- **Node v20.18.0 or later**
 
 ### Step-by-Step Instructions
 
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/AA-IT-WebTechCourse/webshopproject2023-RashedulAlam
-cd webshopproject2023-RashedulAlam
+git clone https://github.com/AA-IT-WebTechCourse/webshopproject2024-rifatshampod
+cd webshopproject2024-rifatshampod
 ```
 
 #### 2. Set up a Virtual Environment
 
 ```bash
 python -m venv env
-source env/Scripts/activate
+source env/Scripts/activate  # For Windows
+# For macOS/Linux:
+# source env/bin/activate
 ```
 
 #### 3. Install Dependencies
@@ -105,12 +143,15 @@ npm install
 npm run dev
 ```
 
-**note:** sometimes during running application on development mode requires browser refresh only for the first time incase any error due to bug on nextjs or webpack however on production running there were no error. It was observed sporadically.
+**note:**
+
+- While running the application in development mode, you might need to refresh the browser for the first time to resolve any initial errors.
+- This behavior is sporadic and does not occur in production mode.
 
 #### 7. Validate the successful running servers
 
-- http://localhost:3000 on browser will show the UI of webshop
-- http://localhost:8000/swagger will show the Open API documentation for backend
+- Frontend UI: Visit http://localhost:5173/ in your browser to access the webshop.
+- Backend Landing Page: Visit http://127.0.0.1:8000/ to confirm the backend is running.
 
 If both backend and frontend server runs properly then start browsing the application. There is optional to populate the database. Make sure to popuate to start the testing.
 
@@ -118,15 +159,8 @@ If both backend and frontend server runs properly then start browsing the applic
 
 Here is a series of images to demonstrate:
 
-![Image 1 Description](./demos/landing-page.png)
-![Image 2 Description](./demos/swagger.png)
-![Image 3 Description](./demos/account.png)
-![Image 4 Description](./demos/database-seed.png)
-![Image 5 Description](./demos/inventory-1.png)
-![Image 6 Description](./demos/inventory-2.png)
-![Image 7 Description](./demos/inventory-3.png)
-![Image 8 Description](./demos/purchase-summary.png)
-![Image 9 Description](./demos/validation-error.png)
+![Backend Landing Page](./screenshots/landing1 btn.png)
+![Backend User List](./screenshots/landing2 user.png)
 
 ## Conclusion
 
