@@ -12,6 +12,7 @@ urlpatterns = [
     path('clean-data/', cleandata, name='clean_data'),
     path('admin/', admin.site.urls),
 
+# API Routes -----------------------------------------------------------
     # Product APIs 
     path('api/products', ProductListView.as_view(), name='product-list'),
     path('api/products/<int:product_id>/', SingleProductView.as_view(), name='single_product'),

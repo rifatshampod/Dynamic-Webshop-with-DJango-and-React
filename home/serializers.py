@@ -95,9 +95,10 @@ class CartEditSerializer(serializers.ModelSerializer):
 # Order API serializers ---------------------------------------------
 
 class OrderSerializer(serializers.ModelSerializer):
+    product = serializers.StringRelatedField(read_only=True)  # Return product info in the response
     class Meta:
         model = Order
-        fields = ['id','product_id', 'buyer_id', 'quantity', 'total_price', 'purchase_date']
+        fields = ['id','product_id', 'buyer_id', 'quantity', 'total_price', 'purchase_date', 'product']
 
 class OrderCreateSerializer(serializers.ModelSerializer):
     buyer_id = serializers.IntegerField(write_only=True)  # Accept buyer_id in the request
