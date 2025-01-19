@@ -50,7 +50,7 @@ class CartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ['id', 'product_id', 'user_id', 'quantity', 'product']
+        fields = ['id', 'product_id', 'user_id', 'quantity','price', 'product']
 
 
 class CartCreateSerializer(serializers.ModelSerializer):
@@ -62,7 +62,7 @@ class CartCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ['quantity', 'product_id', 'user_id', 'user', 'product']
+        fields = ['quantity', 'product_id', 'user_id', 'price', 'user', 'product']
 
     def create(self, validated_data):
         user_id = validated_data.pop('user_id')
@@ -74,7 +74,9 @@ class CartCreateSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({"user_id": "User with this ID does not exist."})
 
         try:
-            validated_data['product'] = Product.objects.get(id=product_id)
+            product = Product.objects.get(id=product_id)
+            validated_data['product'] = product
+            validated_data['price'] = product.price  # Set the product price in the cart
         except Product.DoesNotExist:
             raise serializers.ValidationError({"product_id": "Product with this ID does not exist."})
 
@@ -86,6 +88,7 @@ class CartCreateSerializer(serializers.ModelSerializer):
             )
 
         return super().create(validated_data)
+
     
 class CartEditSerializer(serializers.ModelSerializer):
     class Meta:

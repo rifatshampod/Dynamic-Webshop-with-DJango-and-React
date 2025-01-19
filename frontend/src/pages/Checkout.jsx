@@ -45,7 +45,7 @@ const Checkout = () => {
   const comparePrices = () => {
     let updatedCartItems = [...cartItems];
     const messages = cartItems.map((cartItem) => {
-      const product = products.find((product) => product.id === cartItem.id);
+      const product = products.find((product) => product.id === cartItem.product_id);
       if (product) {
         const cartItemTotalPrice = (cartItem.price || 0) * (cartItem.quantity || 0);
         const productTotalPrice = (product.price || 0) * (cartItem.quantity || 0);

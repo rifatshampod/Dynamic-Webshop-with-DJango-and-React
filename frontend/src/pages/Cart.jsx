@@ -92,7 +92,7 @@ const Cart = () => {
                       </button>
                     </div>
                     <h6 className="text-indigo-600 font-manrope font-bold text-2xl leading-9 text-right">
-                      ${(item.product.price * item.quantity).toFixed(2)}
+                      ${(item.price * item.quantity).toFixed(2)}
                     </h6>
                   </div>
                 </div>
