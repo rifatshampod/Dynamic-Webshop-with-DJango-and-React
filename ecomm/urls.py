@@ -1,9 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-
-
 from home.views import *
 from dashboard.views import *
+
 
 urlpatterns = [
     # Landing page routes

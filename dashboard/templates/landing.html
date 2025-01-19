@@ -67,7 +67,7 @@
                 <!-- status update alert ends here  -->
 
                 <div class="button-container text-center mx-4">
-                  <div class="button-group">
+                  <!-- <div class="button-group">
                     <form method="POST" action="{% url 'clean_data' %}">
                       {% csrf_token %}
                       <button class="clean-btn mx-3">Clean Database</button>
@@ -76,7 +76,7 @@
                     <p class="btn-text">
                       Cleaning Database will delete all the data in the database
                     </p>
-                  </div>
+                  </div> -->
                   <div class="button-group">
                     <form method="POST" action="{% url 'populate' %}">
                       {% csrf_token %}
