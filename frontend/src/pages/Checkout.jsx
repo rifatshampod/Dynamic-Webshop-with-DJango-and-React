@@ -102,7 +102,7 @@ const Checkout = () => {
   const handleProceedCheckout = async () => {
     const payload = cartItems.map((item) => {
       const price = item.product.price || 0;  // Default to 0 if price is undefined or null
-      const quantity = item.product.quantity || 0;  // Default to 0 if quantity is undefined or null
+      const quantity = item.quantity || 0;  // Default to 0 if quantity is undefined or null
   
       const totalPrice = (price * quantity).toFixed(2);  // Ensure valid calculation
   
@@ -148,7 +148,7 @@ const Checkout = () => {
               <li key={item.id} className="flex justify-between p-2 checkoutCard">
                 <span>{item.product.name}</span>
                 <span>Price: ${item.product.price}</span>
-                <span>Quantity: {item.product.quantity}</span>
+                <span>Quantity: {item.quantity}</span>
                 <span>Total: ${(item.product.price * item.quantity).toFixed(2)}</span>
               </li>
             ))}
