@@ -159,8 +159,8 @@ If both backend and frontend server runs properly then start browsing the applic
 
 Here is a series of images to demonstrate:
 
-![Backend Landing Page](./screenshots/landing1 btn.png)
-![Backend User List](./screenshots/landing2 user.png)
+![Backend Landing Page](./screenshots/landing1_btn.png)
+![Backend User List](./screenshots/landing2_user.png)
 
 ## Conclusion
 
