@@ -43,7 +43,7 @@ This project has all the implementation of mandatory and optional requirements.
 - **RQ 12: Pay:**  
   Buyers can view items in the cart and proceed with a payment system that handles price changes or unavailable items.
 - **RQ 13: Routing:**  
-  Implemented as a Single Page Application (SPA) with routes such as `/`, `/signup`, `/login`, `/account`, and `/myitems`.
+  Implemented as a Single Page Application (SPA) with routes such as `/`, `/register`, `/login`, `/my-products`, `/cart`, and `/my-orders`.
 - **RQ: 14: Edit Account:**  
   Authenticated users can change their password.
 - **RQ 15: Display Inventory:**  
