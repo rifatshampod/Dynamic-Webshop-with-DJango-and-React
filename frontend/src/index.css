@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+main{
+    min-height: 85vh;
+}
+
+.title{
+    margin: 2rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.mb-2{
+    margin-bottom: 10px;
+}
+.btnOne{
+    border: 1px solid #B11116;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: #B11116;
+}
+.btnTwo{
+    border: 1px solid #B11116;
+    background-color: #B11116;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    color: #ffffff;
+}
+.btnTwo:disabled{
+    background-color: #D0D0D0;
+    color: #ffffff;
+    border: 1px solid #D0D0D0;
+}
+
+.checkoutCard{
+    border: 1px solid #B11116;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 10px;
+}
+.my-10{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.formCard{
+    height:80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formContent{
+    padding: 1.5rem;
+}
+.imageMaxHeight{
+    height: 180px;
+}

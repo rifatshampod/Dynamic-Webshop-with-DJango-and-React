@@ -148,7 +148,11 @@
                         <td>{{ forloop.counter }}</td>
                         <td>{{product.name}}</td>
                         <td>{{product.price}} €</td>
-                        <td>{{product.quantity}}</td>
+                        <td
+                          class="{% if product.quantity == 0 %} text-danger {% endif %}"
+                        >
+                          {{product.quantity}}
+                        </td>
                         <td>{{product.user.username}}</td>
                       </tr>
                       {% endfor %}

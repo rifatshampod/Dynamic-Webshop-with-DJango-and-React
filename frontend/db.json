@@ -1,0 +1,122 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Product 1",
+      "price": 51,
+      "description": "This is the first product",
+      "userId": "a602",
+      "created_at": "2024-12-10",
+      "quantity": "1"
+    },
+    {
+      "id": "2",
+      "name": "Product 2",
+      "price": 20,
+      "description": "This is the second product",
+      "userId": "a602",
+      "created_at": "2024-12-10",
+      "quantity": "01"
+    },
+    {
+      "id": "3",
+      "name": "Product 3 new",
+      "price": "850",
+      "description": "This is the third product",
+      "userId": "a603",
+      "created_at": "2024-12-10",
+      "quantity": "10"
+    },
+    {
+      "id": "eace",
+      "name": "Product demo",
+      "price": 42,
+      "description": "This is the first product",
+      "userId": "a602",
+      "created_at": "2024-12-10",
+      "quantity": "0"
+    },
+    {
+      "id": "bf16",
+      "name": "testr",
+      "price": "23",
+      "description": "test desc",
+      "userId": "a603",
+      "quantity": "10"
+    }
+  ],
+  "productsSearch": [
+    {
+      "id": "1",
+      "name": "Product 1",
+      "price": 52,
+      "description": "This is the first product",
+      "userId": "a602",
+      "created_at": "2024-12-10",
+      "quantity": "10"
+    }
+  ],
+  "cart": [
+    {
+      "id": "3",
+      "name": "Product 3 new",
+      "price": "850",
+      "description": "This is the third product",
+      "userId": "a603",
+      "created_at": "2024-12-10",
+      "quantity": 1
+    }
+  ],
+  "myOrder": [
+    {
+      "id": "1",
+      "productName": "Product 1",
+      "price": 52,
+      "quantity": 1,
+      "totalPrice": "52.00"
+    }
+  ],
+  "users": [
+    {
+      "id": "a602",
+      "email": "test@example.com",
+      "password": "122345",
+      "userName": "arifbipu1",
+      "accessToken": "randomAccessTokenForUser"
+    },
+    {
+      "id": "a603",
+      "email": "arifbipubd3@gmail.com",
+      "password": "123345",
+      "userName": "arifbipu2",
+      "accessToken": "96kb15iilhh"
+    },
+    {
+      "id": "c7de",
+      "email": "abipu@gmail.com",
+      "password": "112345",
+      "userName": "arifbipu3",
+      "accessToken": "token-1734177087503"
+    },
+    {
+      "id": "272f",
+      "email": "abipu1@gmail.com",
+      "password": "123455",
+      "accessToken": "token-1734698167175"
+    },
+    {
+      "id": "0586",
+      "email": "aa@gmail.com",
+      "password": "123445",
+      "userName": "arifbipu4",
+      "accessToken": "token-1734698252246"
+    },
+    {
+      "id": "4501",
+      "userName": "arifbipu",
+      "email": "arifbipubd@gmail.com",
+      "password": "12345",
+      "accessToken": "token-1735990740452"
+    }
+  ]
+}
