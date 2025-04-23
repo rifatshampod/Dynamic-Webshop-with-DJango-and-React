@@ -1,5 +1,5 @@
 # WebShop
-
+## ![Webshop Homepage](./screenshots/homepage.png)
 ## Author
 
 - **Name**: Rifat Bin Monsur
