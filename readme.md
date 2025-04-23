@@ -7,48 +7,40 @@
 
 ## Implemented Requirements
 
-This project has all the implementation of mandatory and optional requirements.
+This project has the following implementation:
 
-### Mandatory Requirements:
-
-- **RQ 1: Project Folder:**
-  - Root folder contains `readme.md` listing name, email, implemented requirements, and run instructions.
-  - Backend folder contains `requirements.txt`.
-  - Frontend folder contains `package.json` and source files.
-- **RQ 2: Backend:**
+- **Backend:**
   - Built using Django v5.1.4.
   - Provides an API and serves JSON to the shop page and HTML for the landing page.
   - Uses SQLite as the database.
-- **RQ 3: Frontend:**
+  - 
+- **Frontend:**
   - Implemented using React v18.3.1.
-- **RQ 4: Automatic Database Population:**
-  - A button or link populates the database with 6 users and 30 items, clears the database before repopulation, and updates the landing page with a message.
-- **RQ 5: Browse Items:**
+- **Automatic Database Population:**
+  - For testing purpose, button or link populates the database with 6 users and 30 items, clears the database before repopulation, and updates the landing page with a message.
+- **Browse Items:**
   - Any user can view a list of items for sale with details such as title, description, price, and date added.
-- **RQ 6: Create Account:**
+- **Create Account:**
   - Users can register by providing a username, password, and email.
-- **RQ 7: Login:**
+- **Login:**
   - Registered users can log in with their username and password.
-- **RQ 8: Add Item:**
+- **Add Item:**
   - Authenticated users can add items to sell by providing a title, description, and price.
-- **RQ 9: Add to Cart:**
+- **Add to Cart:**
   - Authenticated users can add items to their cart, excluding their own items.
-
-### Optional Requirements:
-
-- **RQ 10: Search:**  
+- **Search:**  
   Users can search for items by part of the product title. Search function results in an API request.
-- **RQ 11: Remove from Cart:**  
+- **Remove from Cart:**  
   Items can be removed from the cart by the buyer.
-- **RQ 12: Pay:**  
+- **Pay:**  
   Buyers can view items in the cart and proceed with a payment system that handles price changes or unavailable items.
-- **RQ 13: Routing:**  
+- **Routing:**  
   Implemented as a Single Page Application (SPA) with routes such as `/`, `/register`, `/login`, `/my-products`, `/cart`, and `/my-orders`.
-- **RQ: 14: Edit Account:**  
+- **Edit Account:**  
   Authenticated users can change their password.
-- **RQ 15: Display Inventory:**  
+- **Display Inventory:**  
   Authenticated users can view their items from the "Inventory" page in the user menu, items are categorised as 'Available' and 'Sold Out'
-- **RQ 16: Edit Item:**  
+- **Edit Item:**  
   Sellers can update the price of items that are still available.
 - **Non-functional:**  
   The web pages are designed to be user-friendly and visually appealing on desktop screens. UI design is inspired from the Åbo Akademi Webshop.
